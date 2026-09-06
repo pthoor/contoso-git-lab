@@ -15,6 +15,7 @@ workflow.
 |---|---|
 | [Enable MFA for admin accounts](identity/enable-mfa-for-admins.md) | High |
 | [Rotate service principal credentials](identity/rotate-service-principal-credentials.md) | Medium |
+| [Malformed synthetic recommendation](identity/malformed-synthetic-recommendation-20260906T084005Z-43729.md) | High |
 
 ## Azure platform
 
