@@ -10,7 +10,7 @@ from this exact file.
 
 ```text
 service       = security-score-api
-retry_count = 7
+retry_count = 9
 backoff       = exponential
 timeout_ms    = 2000
 ```
