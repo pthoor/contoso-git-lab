@@ -1,0 +1,8 @@
+# CODEOWNERS
+#
+# The published training repository is owned by @pthoor.
+
+/docs/recommendations/identity/    @pthoor
+/docs/recommendations/azure/       @pthoor
+/conflict-lab/                     @pthoor
+/.github/                          @pthoor

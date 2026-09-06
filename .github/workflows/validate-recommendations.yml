@@ -1,0 +1,25 @@
+name: validate-recommendations
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-recommendations:
+    name: validate-recommendations
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check recommendation files have required sections
+        shell: bash
+        run: >-
+          bash scripts/validate-recommendations.sh
+          "${{ github.event.pull_request.base.sha }}"
+          "${{ github.event.pull_request.head.sha }}"
