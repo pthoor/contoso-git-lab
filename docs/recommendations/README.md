@@ -21,3 +21,4 @@ workflow.
 | Recommendation | Severity |
 |---|---|
 | [Enable Defender for Storage](azure/enable-defender-for-storage.md) | High |
+| [Audit resource locks on critical synthetic resources](azure/enable-synthetic-resource-lock-audit-20260906T084005Z-43729.md) | Medium |
