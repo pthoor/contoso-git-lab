@@ -1,0 +1,18 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/*
+!.vscode/extensions.json
+
+# Node (if any tooling is added later)
+node_modules/
+
+# Common secret-shaped files — a habit, not a substitute for secret scanning
+.env
+.env.*
+*.pem
+*.key
+*password*
+*secret*
