@@ -155,8 +155,7 @@ accident.
 
 ## Step 3 — Create your branch
 
-Pick a recommendation to add, and decide which category it belongs in — this
-matters, because `CODEOWNERS` routes review requests based on folder:
+Pick a recommendation to add, and decide which category it belongs in:
 
 - `docs/recommendations/identity/` → identity & access recommendations
   (e.g. Enable Conditional Access for break-glass accounts, Require approval
@@ -188,6 +187,13 @@ git switch feature/<short-recommendation-name>   # forward again
 VS Code equivalent: click the branch name in the lower-left status bar, choose
 **Create new branch**, and enter the same `feature/...` name. Use either the
 CLI or UI to create it, not both.
+
+> **About `CODEOWNERS`:** the deck showed how a `.github/CODEOWNERS` file routes
+> review requests to whoever owns a folder. Open this repository's copy — every
+> path points at a single owner, and required code-owner review is switched
+> off, so nothing is actually being routed here. In a real repository those
+> paths map to real teams. It's worth seeing the difference between what a
+> GitHub feature *can* do and what a given repository has configured.
 
 ✅ **Checkpoint:** `git branch` shows `* feature/...`, and the same branch name
 appears in VS Code's lower-left status bar.
