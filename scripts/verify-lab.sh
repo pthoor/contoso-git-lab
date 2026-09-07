@@ -131,7 +131,7 @@ if grep -qE '^(<<<<<<<|=======|>>>>>>>)' conflict-lab/retry-policy.md; then
 fi
 
 mapfile -t retry_lines < <(
-  grep -E '^retry_count = [0-9]+$' conflict-lab/retry-policy.md || true
+  grep -E '^retry_count[[:space:]]*=[[:space:]]*[0-9]+[[:space:]]*$' conflict-lab/retry-policy.md || true
 )
 if (( ${#retry_lines[@]} != 1 )) || [[ "${retry_lines[0]:-}" == *"= 3" ]]; then
   echo "FAIL: retry_count must be one resolved numeric value different from the seed value 3." >&2

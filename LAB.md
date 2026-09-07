@@ -408,12 +408,15 @@ qualifying approval:
 2. Confirm the merge.
 3. Click **Delete branch** (cleans up the now-merged branch on GitHub).
 
-Then bring your local `main` up to date and remove your local branch too:
+Then bring your local `main` up to date and remove your local branch too.
+Note the capital `-D`: a squash merge replays your branch as one brand-new
+commit on `main`, so the lowercase `-d` safety check cannot see that your
+work was merged and refuses to delete the branch.
 
 ```bash
 git checkout main
 git pull origin main          # or: git pull upstream main   (Option A)
-git branch -d feature/<short-recommendation-name>
+git branch -D feature/<short-recommendation-name>
 ```
 
 VS Code equivalents: choose `main` from the lower-left branch selector, run
@@ -460,9 +463,9 @@ Work in the same pair as Step 9.
 
    ```text
    <<<<<<< HEAD
-   retry_count   = 5
+   retry_count = 5
    =======
-   retry_count   = 7
+   retry_count = 7
    >>>>>>> upstream/main
    ```
 

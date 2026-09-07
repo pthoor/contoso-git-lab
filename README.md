@@ -17,7 +17,17 @@ this collaboration-focused lab.
 
 ## Start here
 
-👉 **[Open the Lab 1 guide](LAB.md)** and follow it step by step.
+This repository hosts **two labs**, done in order. Both work in the same
+recommendation library, so finish Lab 1 before starting Lab 2.
+
+| | Lab | Guide | Time |
+|---|---|---|---|
+| 1 | Git & GitHub fundamentals — branch, commit, pull request, review, merge, and a guided merge conflict | 👉 **[LAB.md](LAB.md)** | 60–75 min |
+| 2 | GitHub Copilot in VS Code — Copilot drafts the change, the Lab 1 workflow still governs what merges | 👉 **[lab2/LAB.md](lab2/LAB.md)** | 75–85 min |
+
+The slide deck that introduces both is
+[`docs/contoso-git-github-fundamentals.html`](docs/contoso-git-github-fundamentals.html)
+— download it and open it in a browser.
 
 Your facilitator must provide the published source-repository URL and announce
 whether the class is using forks or direct collaborator access. Do not assume
@@ -29,12 +39,14 @@ an example repository name in screenshots or course notes is live.
 docs/recommendations/   Security recommendations, grouped by category
   identity/              Identity & access recommendations
   azure/                 Azure platform recommendations
-conflict-lab/           A file used for the guided merge-conflict exercise
+docs/*.html             The lunch & learn slide deck
+conflict-lab/           The file used for the guided merge-conflict exercise
 .github/                Pull request template, CODEOWNERS, and CI checks
 scripts/                CI validation and local completion verification
 CONTRIBUTING.md         Branch naming and commit message conventions
 LAB.md                  The Lab 1 step-by-step guide
-SETUP.md                Repo-admin checklist (branch protection, etc.) — not for participants
+SETUP.md                Lab 1 repo-admin checklist — not for participants
+lab2/                   Lab 2: guide, orientation, and its own facilitator checklist
 ```
 
 ## Ground rules for this repository

@@ -60,9 +60,14 @@ Settings → Code security:
 
 ## 4. CODEOWNERS
 
-`.github/CODEOWNERS` currently references synthetic team names
-(`@contoso/cloud-security` etc.) copied from the slide deck for narrative
-consistency. Before relying on required code-owner review:
+`.github/CODEOWNERS` assigns every path to `@pthoor`, the owner of the
+published training repository. The `@contoso/*` team names shown on the slide
+deck are illustrative only and deliberately do not exist here — no GitHub
+organization backs them, so a lab repo that used them would route reviews to
+nobody. Required code-owner review is currently **off**
+(`require_code_owner_reviews: false`), so this file does not gate any merge.
+
+If you do want code-owner review to be enforced:
 
 - [ ] Either replace these with real GitHub usernames/teams, **or**
 - [ ] Remove the CODEOWNERS requirement from the ruleset for this lab (a

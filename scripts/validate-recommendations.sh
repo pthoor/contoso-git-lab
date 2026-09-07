@@ -41,13 +41,13 @@ for file in "${files[@]}"; do
   echo "Checking $file"
 
   for heading in "## Risk" "## Recommendation" "## Example"; do
-    if ! grep -qF "$heading" "$file"; then
+    if ! grep -qE "^${heading}[[:space:]]*$" "$file"; then
       echo "::error file=$file::Missing required section '$heading'"
       fail=1
     fi
   done
 
-  if ! grep -qE '^\*\*Severity:\*\* (Low|Medium|High|Critical)$' "$file"; then
+  if ! grep -qE '^\*\*Severity:\*\* (Low|Medium|High|Critical)[[:space:]]*$' "$file"; then
     echo "::error file=$file::Missing or invalid 'Severity' line (expected Low/Medium/High/Critical)"
     fail=1
   fi

@@ -1,0 +1,9 @@
+# Normalize line endings so the local checks in scripts/ behave the same on
+# Windows, macOS, and Linux. Without this, Git for Windows checks Markdown out
+# as CRLF and the severity/retry_count checks fail against a trailing \r even
+# though CI (which checks out LF on Linux) passes.
+* text=auto eol=lf
+*.md   text eol=lf
+*.sh   text eol=lf
+*.yml  text eol=lf
+*.html text eol=lf
