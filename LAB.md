@@ -5,7 +5,11 @@ first task is to add one new security recommendation to the team's knowledge
 hub — and to do it the way every real pull request happens: on a branch,
 reviewed, and merged through GitHub.
 
+**Lab 1 of 2.** [Lab 2](lab2/LAB.md) lives in this same repository and picks up
+where this one ends — do them in order.
+
 **Time:** ~60–75 minutes
+
 **You'll practice:** working in an existing repository; clone/fork, branch,
 edit, stage, commit, push, pull request, review, merge, and resolving a merge
 conflict through both the Git CLI and VS Code Source Control.
@@ -519,7 +523,7 @@ the same line.
 
 | Concept | What you did |
 |---|---|
-| Remote | Talked to GitHub via `origin` (and `upstream` if you forked) |
+| Remote | Talked to GitHub via `origin` (your fork) and `upstream` (the original) |
 | Branch | Isolated your change from `main` |
 | Staging | Chose exactly what went into each commit |
 | Commit | Recorded a snapshot with a message that explains itself |
@@ -529,5 +533,31 @@ the same line.
 | Merge | Integrated an approved change into `main` |
 | Conflict | Resolved two changes to the same line, by hand |
 
-Next up: **Lab 2 — GitHub Copilot in VS Code**, where an AI agent helps write
-the change, and this exact workflow is what keeps it under control.
+---
+
+## Before you stop — tidy up
+
+The conflict exercise left you on a branch, with a stale `main`. Get back to a
+clean starting point so Lab 2 begins from current work:
+
+```bash
+git checkout main
+git pull upstream main
+git branch -D conflict/<your-name>-retry-policy
+```
+
+Delete the `conflict/...` branch on GitHub too, from your fork's **Branches**
+page.
+
+✅ **Checkpoint:** `git status` says you're on `main` with nothing to commit,
+and `git log --oneline -5` shows other people's merged recommendations
+alongside your own.
+
+---
+
+## Next: Lab 2
+
+👉 **[Lab 2 — GitHub Copilot in VS Code](lab2/LAB.md)**
+
+An AI writes the change; this exact workflow is what keeps it under control.
+Keep the clone you just made — Lab 2 continues in it.

@@ -11,8 +11,8 @@ human reviewer still decide whether it belongs on `main`.
 
 👉 **[Open the Lab 2 guide](LAB.md)** and follow it step by step.
 
-This lab continues in the fork you made in Lab 1, so keep that clone. If you
-no longer have it, redo Lab 1's Step 1 before starting.
+This lab continues in the fork you made in [Lab 1](../LAB.md), so keep that
+clone. If you no longer have it, redo Lab 1's Step 1 before starting.
 
 ## What you will do
 

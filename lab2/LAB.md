@@ -4,7 +4,11 @@
 the same recommendation repository from Lab 1. Copilot will help draft the
 next change, but it does not get to approve its own work.
 
-**Time:** ~60–75 minutes  
+**Lab 2 of 2.** Assumes you finished [Lab 1](../LAB.md) and still have your
+fork cloned.
+
+**Time:** ~75–85 minutes
+
 **You'll practice:** Copilot Chat, reviewing AI output, optionally accepting an
 inline suggestion, inspecting a diff, validating the change, and governing it
 through a pull request and human review.

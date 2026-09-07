@@ -12,7 +12,7 @@ this file lists only the additional Copilot checks.
       merge PRs.
 - [ ] Confirm each participant's Lab 1 work is merged, or tell them to start
       from the current source `main` rather than an old feature branch.
-- [ ] Budget 60–75 minutes for the core lab. Treat the coding-agent exercise
+- [ ] Budget 75–85 minutes for the core lab. Treat the cloud-agent exercise
       as stretch content, not a completion requirement.
 
 ## 2. Verify Copilot access in VS Code
