@@ -8,14 +8,17 @@ This checklist cannot publish it automatically.
 
 ## 1. Repository basics
 
-- [ ] Repository name: `contoso-git-lab` (or similar)
-- [ ] Visibility: **Public**
+Published at **https://github.com/pthoor/contoso-git-lab**. The participant
+guides link to that URL directly, so if you fork or rename this repository for
+your own session, update the links in `LAB.md` Step 0 and Step 1, `lab2/LAB.md`
+Step 1, and `README.md`.
+
+- [ ] Visibility: **Public** — participants must be able to fork it
+- [ ] Default branch: `main`
+- [ ] Forking enabled (Settings → General → Features)
 - [ ] Description: "Training repository for Contoso's Git & GitHub
       Fundamentals lab. Synthetic content only — not real Contoso data."
-- [ ] Add topics: `training`, `git`, `github-skills`, `contoso`
-- [ ] Default branch: `main`
-- [ ] Give participants the final HTTPS URL as `<source-repository-url>`;
-      the lab intentionally does not depend on an unpublished example URL
+- [ ] Topics: `training`, `git`, `github-skills`, `contoso`
 
 ## 2. Branch protection / ruleset on `main`
 
@@ -74,29 +77,36 @@ If you do want code-owner review to be enforced:
       single facilitator account can't satisfy a team-based CODEOWNERS rule
       alone during a live lab)
 
-## 5. Collaborator access (if using Option B: direct clone, no forks)
+## 5. Collaborator access (only on request)
 
-- [ ] Add each participant as a collaborator with **Write** access, or
-- [ ] Create a GitHub team and grant the team Write access
+The labs are fork-based, so **no collaborator access is needed by default**.
+Participants fork, push to their own copy, and open pull requests here.
 
-If participants are forking instead (Option A in `LAB.md`), no collaborator
-access is needed for contributors; the facilitator/reviewer still needs
-permission on the source repository to approve and merge.
+The root `README.md` invites anyone who wants to work directly in this
+repository to open an issue asking for access. If you grant one:
+
+- [ ] Add them as a collaborator with **Write** access
+- [ ] Remember they can now approve other participants' pull requests, which
+      changes who can satisfy the branch protection rule
+- [ ] Remove the access when the session is over
 
 ## 6. Approval and merge ownership
 
-Choose one model and announce it before participants clone:
+Branch protection counts approvals only from people with write access, so on a
+fork-based lab **every approving review and every merge is yours**. Participants
+can review each other fully — comments, suggestions, even an Approve — and none
+of it will satisfy the rule. Lab 1 Step 9 explains this to them as a lesson
+about who gets to vouch for a merge, so they aren't surprised.
 
-| Access model | Practice review | Approval that satisfies the rule | Who merges |
-|---|---|---|---|
-| Fork | Pair participant may comment or approve for practice | Facilitator or designated reviewer with Write/Maintain access to the source repository | Facilitator or source-repository maintainer |
-| Direct | A different participant with Write access may approve | Participant reviewer or facilitator with Write/Maintain access | Participant with Write access or facilitator, as announced |
+Budget for it: roughly two approve-and-merge actions per participant across
+Lab 1 (the recommendation PR and the conflict PR).
 
-- [ ] Ensure at least two qualified reviewers are available, so a
-      facilitator's own test PR can receive an independent approval
-- [ ] Tell participants who will supply the qualifying approval and who will
-      merge in the selected model
-- [ ] Tell fork participants not to expect an active merge button
+- [ ] Plan for ~2 merges per participant, and decide whether you'll merge as
+      they arrive or in batches at set points
+- [ ] Have a second reviewer with write access available if you want your own
+      dry-run PR independently approved
+- [ ] Tell participants up front that the merge button won't be active for
+      them — it's expected, not a misconfiguration
 
 ## 7. Actions
 

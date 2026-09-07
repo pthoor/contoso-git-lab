@@ -11,9 +11,8 @@ human reviewer still decide whether it belongs on `main`.
 
 👉 **[Open the Lab 2 guide](LAB.md)** and follow it step by step.
 
-This lab assumes you completed Lab 1 and still have access to its published
-participant repository. Your facilitator will confirm whether to reuse your
-existing clone or make a fresh clone.
+This lab continues in the fork you made in Lab 1, so keep that clone. If you
+no longer have it, redo Lab 1's Step 1 before starting.
 
 ## What you will do
 

@@ -7,7 +7,7 @@ this file lists only the additional Copilot checks.
 ## 1. Confirm the supported path
 
 - [ ] Announce whether participants should reopen their Lab 1 clone or make a
-      fresh clone of `<source-repository-url>`.
+      fresh clone of their Lab 1 fork.
 - [ ] Keep the same fork/direct-access model and explain who can approve and
       merge PRs.
 - [ ] Confirm each participant's Lab 1 work is merged, or tell them to start

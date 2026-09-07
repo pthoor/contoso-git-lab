@@ -11,29 +11,28 @@ through a pull request and human review.
 
 > **Copilot changes how we create the change — not how we govern it.**
 
-This lab assumes the Git and GitHub mechanics from Lab 1 are familiar. Commands
-are included as short reminders, not retaught. UI labels can differ slightly
-by VS Code/Copilot version. Use Chat and apply the edit manually, or use an
-editing/agent surface where available; the required outcome is the same
-reviewable file.
+This lab assumes Lab 1's Git and GitHub mechanics are familiar — commands
+appear as reminders, not lessons. Copilot's UI labels shift between versions,
+so if a button isn't where this guide says, use Chat and apply the edit by
+hand. The outcome is the same either way: a file you reviewed before anyone
+else saw it.
 
 ---
 
 ## Step 0 — Preflight
 
-- [ ] Your facilitator confirmed whether to reopen your Lab 1 clone or clone
-      `<source-repository-url>` again.
-- [ ] Your GitHub Copilot plan/seat is active.
-- [ ] VS Code is signed in to the correct GitHub account.
-- [ ] Copilot Chat opens and answers: `Summarize the purpose of this workspace.`
-- [ ] You can reach public Microsoft documentation to verify technical claims.
-- [ ] Your Lab 1 PR is merged, or you have been told to start from the latest
-      source `main`.
+- [ ] Your Lab 1 fork is still cloned locally, and your Lab 1 pull request was
+      merged.
+- [ ] Your GitHub Copilot seat is active, and VS Code is signed in to the same
+      GitHub account.
+- [ ] Copilot Chat opens and answers a throwaway question such as
+      `Summarize the purpose of this workspace.`
+- [ ] You can reach Microsoft Learn in a browser — you'll verify Copilot's
+      claims against it.
 
-If Chat, inline suggestions, or an agent option is missing, stop and tell the
-facilitator. Organization policy and Copilot plan can affect which surfaces
-are available. The core lab needs Chat; inline suggestions and cloud agent
-have fallback/optional paths.
+If Chat doesn't work, stop and tell your facilitator — the core lab needs it.
+Inline suggestions and the cloud agent are optional, so it's fine if those
+aren't available to you.
 
 **Prompt safety:** prompts are another place data can leave your control. Use
 only synthetic names and values. Do not paste real tenant IDs, subscription
@@ -46,12 +45,12 @@ shows no uncommitted work.
 
 ## Step 1 — Start from current `main`
 
-Use the same access model as Lab 1:
+Bring your fork up to date first — other people's Lab 1 recommendations were
+merged into the original repository while you were working:
 
 ```bash
 git checkout main
-git pull origin main          # direct access
-# or: git pull upstream main  # fork workflow
+git pull upstream main
 git switch -c feature/restrict-anonymous-blob-access-<your-initials>
 ```
 

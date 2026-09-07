@@ -22,126 +22,79 @@ This lab starts from an existing GitHub repository; it does not cover
 
 ## Step 0 — Preflight
 
-**Why any of this matters:** Git records your work as a series of snapshots
-(*commits*) instead of overwriting files in place. That means you can always
-see what changed, when, and why — and undo it if needed. A *branch* is just a
-movable pointer to a line of commits, so you can experiment without touching
-`main` until the change is reviewed and ready.
+You need three things. Check them now, not when a command fails halfway
+through Step 4.
 
-- [ ] Your facilitator gave you `<source-repository-url>` and announced
-      **Option A (fork)** or **Option B (direct)**.
-- [ ] You have a GitHub account and can open that URL in a browser.
-- [ ] Git and VS Code are installed on your laptop.
-- [ ] You're signed in to GitHub inside VS Code (or have a working
-      credential helper / SSH key).
+- [ ] A GitHub account, signed in.
+- [ ] Git and VS Code installed.
+- [ ] VS Code signed in to GitHub (or a working credential helper / SSH key).
 
-Run this preflight before cloning:
+Two commands confirm the tools:
 
 ```bash
 git --version
 code --version
 ```
 
-Both commands should print a version. If `code` is not found, open VS Code
-normally and use **File → Open Folder** instead of `code .`. Your facilitator
-must publish the participant repository before the lab starts; this content
-does not create or publish it.
+Both should print a version. If `code` isn't found, that's fine — open VS Code
+normally and use **File → Open Folder** wherever this guide says `code .`.
 
-Confirm the source repository is reachable:
+And one command confirms you can reach the repository:
 
 ```bash
-git ls-remote <source-repository-url> HEAD
+git ls-remote https://github.com/pthoor/contoso-git-lab HEAD
 ```
 
-Expected output is a long commit ID followed by `HEAD`. `Repository not found`
-usually means the URL or your access is wrong. An authentication prompt or
-error means sign-in must be fixed before continuing.
+Expected: a long commit ID followed by `HEAD`. If you get `Repository not
+found` or an authentication prompt, fix that with your facilitator before
+going further — everything after this depends on it.
 
-Check your Git identity is set (this name/email will appear on every commit
-you make today):
-
-```bash
-git config --global user.name
-git config --global user.email
-```
-
-If either is empty, set them. Before choosing an email, decide whether you
-want it published in commit history. GitHub provides a private
-`<id>+<username>@users.noreply.github.com` address under **Settings -> Emails**.
-Use an email associated with your GitHub account so commits are attributed:
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
-```
-
-Re-run both `git config` commands and confirm they print the intended values.
+✅ **Checkpoint:** both versions printed, and `ls-remote` printed a commit ID.
 
 ---
 
-## Step 1 — Get your own copy of the repository
+## Step 1 — Fork the repository and clone your fork
 
-Depending on which access model your facilitator announced:
+You don't have write access to the training repository, and you don't need it.
+You'll work in your own copy — a **fork** — and propose your change back with
+a pull request. This is exactly how contributing to any open-source project
+works.
 
-### Option A — Fork (no write access to the source repo)
+1. Open https://github.com/pthoor/contoso-git-lab and click **Fork**
+   (top right) → **Create fork**. You now have your own copy at
+   `https://github.com/<your-username>/contoso-git-lab`.
 
-1. On GitHub, click **Fork** (top right of this repository) → create the fork
-   under your own account.
-2. Clone **your fork**, not the original. Copy its HTTPS URL from GitHub:
+2. Clone **your fork** — not the original. Copy the HTTPS URL from your fork's
+   green **Code** button:
 
    ```bash
-   git clone <your-fork-url>
-   cd <repository-folder>
+   git clone https://github.com/<your-username>/contoso-git-lab.git
+   cd contoso-git-lab
    ```
 
-3. Add the original repository as a second remote, conventionally named
-   `upstream`:
+3. Tell Git where the original lives, so you can pull in other people's merged
+   work later. The conventional name for it is `upstream`:
 
    ```bash
-   git remote add upstream <source-repository-url>
+   git remote add upstream https://github.com/pthoor/contoso-git-lab.git
    git remote -v
    ```
 
-   You should see **two** remotes: `origin` (your fork) and `upstream` (the
-   source repository).
+   You should see **two** remotes: `origin` is your fork (you can push to it),
+   `upstream` is the original (you can only read from it).
 
-### Option B — Direct clone (you were added as a collaborator)
-
-```bash
-git clone <source-repository-url>
-cd <repository-folder>
-git remote -v
-```
-
-You should see one remote, `origin`, pointing at the shared repository.
-
-Expected: each remote has a `(fetch)` and `(push)` line. In Option A, `origin`
-points to your account and `upstream` points to the source repository. In
-Option B, `origin` points to the source repository.
-
-If the repository is private, authentication must succeed when you clone or
-fetch it. After cloning, this is a second read-only credential check:
-
-```bash
-git ls-remote origin HEAD
-```
-
-Expected output is one commit hash followed by `HEAD`; an authentication
-error means you must sign in or configure your credential helper/SSH key
-before continuing.
-
-Open the cloned workspace:
+Open the folder in VS Code:
 
 ```bash
 code .
 ```
 
-If you opened VS Code manually, use **File -> Open Folder** and select the
-cloned `<repository-folder>`. If prompted, trust the folder. Open **Terminal
--> New Terminal** and confirm its prompt is inside that folder.
+If you opened VS Code manually, use **File → Open Folder** and pick the
+`contoso-git-lab` folder. Trust the folder if prompted, then open
+**Terminal → New Terminal** and check the prompt is inside that folder.
 
-✅ **Checkpoint:** VS Code Explorer shows `LAB.md`, and `git remote -v` shows
-the remote(s) described above.
+✅ **Checkpoint:** VS Code Explorer shows `LAB.md`, and `git remote -v` lists
+both `origin` (your fork) and `upstream` (the original).
 
 ---
 
@@ -212,7 +165,7 @@ Make sure you're starting from an up-to-date `main`, then branch:
 
 ```bash
 git checkout main
-git pull origin main          # or: git pull upstream main   (Option A)
+git pull upstream main        # the original repo, not your fork
 git switch -c feature/<short-recommendation-name>
 ```
 
@@ -282,7 +235,26 @@ unrelated files.
 
 ## Step 6 — Stage and commit
 
-Choose one path; do not stage and commit the same work twice.
+**First, check Git knows who you are.** Your name and email are stamped into
+every commit you make, permanently and publicly:
+
+```bash
+git config --global user.name
+git config --global user.email
+```
+
+If either prints nothing, set them now — `git commit` will refuse otherwise:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
+Use an email tied to your GitHub account so your commits are attributed to
+you. If you'd rather not publish a personal address, GitHub gives you a private
+`<id>+<username>@users.noreply.github.com` one under **Settings → Emails**.
+
+Now commit. Choose one path; do not stage and commit the same work twice.
 
 ### Git CLI
 
@@ -337,7 +309,7 @@ bash scripts/verify-lab.sh recommendation
 ```
 
 Expected final line: `PASS: recommendation branch ...`. If it reports a stale
-base, run `git fetch upstream` for Option A or `git fetch origin` for Option B,
+base, run `git fetch upstream`,
 then retry.
 
 ```bash
@@ -390,21 +362,27 @@ Pair up with another participant:
 
 This is the step that turns a private change into a team decision.
 
-**Permission note:** In fork mode, your participant review is practice but
-normally cannot satisfy the protected branch's required approval. A
-facilitator or designated reviewer with Write or Maintain access must approve
-and merge. In direct mode, a different participant with Write access may
-supply the required approval; follow the facilitator's instruction about who
-merges. You cannot approve your own PR.
+**Why your approval doesn't merge it — and why that's the point.**
+
+Your review is real. It's recorded on the pull request, your comments are
+permanent, and you can submit it as **Approve**. What it cannot do is satisfy
+this repository's protection rule, because that rule counts approvals only
+from people with write access — and you're contributing from a fork.
+
+That isn't a limitation of your review. It's the repository deciding who is
+allowed to vouch for a merge, which is the same question every real engineering
+team has to answer. Your facilitator supplies the approving review and merges.
+
+You also can't approve your own pull request — no repository lets you do that.
 
 ---
 
 ## Step 10 — Merge
 
-Once your own PR has a passing `validate-recommendations` check and a
-qualifying approval:
+Once your own PR has a passing `validate-recommendations` check and your
+facilitator's approval:
 
-1. The person authorized for your access model clicks **Squash and merge**.
+1. Your facilitator clicks **Squash and merge**.
 2. Confirm the merge.
 3. Click **Delete branch** (cleans up the now-merged branch on GitHub).
 
@@ -415,7 +393,7 @@ work was merged and refuses to delete the branch.
 
 ```bash
 git checkout main
-git pull origin main          # or: git pull upstream main   (Option A)
+git pull upstream main        # the original repo, not your fork
 git branch -D feature/<short-recommendation-name>
 ```
 
@@ -446,16 +424,13 @@ Work in the same pair as Step 9.
 
    ```bash
    git checkout conflict/<your-name>-retry-policy
-   # Option A (fork): fetch and merge the source repository's main.
+   # Fetch and merge the original repository's main.
    git fetch upstream
    git merge upstream/main
-   # Option B (direct clone): use origin instead.
-   # git fetch origin
-   # git merge origin/main
    ```
 
-   Do not mix the remote names: Person A's merge lands on source `main`, which
-   is `upstream/main` for a fork and `origin/main` for a direct clone.
+   Watch the remote name: Person A's change was merged into the *original*
+   repository, which is `upstream` — not `origin`, which is your own fork.
 
 6. Git marks the conflicting section directly in the file, and running
    `git status` will list it under **"Unmerged paths"**. Open the file — it

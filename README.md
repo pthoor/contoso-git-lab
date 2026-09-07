@@ -10,10 +10,10 @@ Fundamentals** lunch & learn. It is a small, growing library of security
 recommendations — the kind a cloud security team might maintain internally —
 written as plain Markdown files.
 
-You are going to add to this **existing repository** using the workflow real
-engineering teams use every day: **branch -> edit -> commit -> push -> pull
-request -> review -> merge.** Creating a repository with `git init` is outside
-this collaboration-focused lab.
+You'll add to this **existing repository** the way engineering teams work every
+day: **fork → branch → commit → push → pull request → review → merge.**
+Creating a repository from scratch with `git init` is not part of these labs —
+joining one that already exists is the harder and more common skill.
 
 ## Start here
 
@@ -29,9 +29,12 @@ The slide deck that introduces both is
 [`docs/contoso-git-github-fundamentals.html`](docs/contoso-git-github-fundamentals.html)
 — download it and open it in a browser.
 
-Your facilitator must provide the published source-repository URL and announce
-whether the class is using forks or direct collaborator access. Do not assume
-an example repository name in screenshots or course notes is live.
+**You don't need write access.** Fork this repository to your own account and
+propose changes with a pull request — the same way you'd contribute to any
+open-source project. Lab 1 Step 1 walks you through it.
+
+If you'd rather work directly in this repository instead of a fork, open an
+issue asking for collaborator access and say why.
 
 ## What's in this repository
 
