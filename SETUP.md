@@ -116,6 +116,39 @@ Lab 1 (the recommendation PR and the conflict PR).
       check, so it runs fast and does not depend on an external service or
       secret.
 
+### Fork pull request workflow approval — check this every time
+
+This is the setting most likely to stall the room. Participants contribute
+from forks, and if fork workflows need approval, **every participant's first
+pull request parks on a pending required check** until you click *Approve and
+run* — all of them at once, at the same moment.
+
+Settings → Actions → General → **Fork pull request workflows from outside
+collaborators**. Set it to *Require approval for first-time contributors who
+are new to GitHub* — the least restrictive option available on a public repo.
+Everyone with an existing GitHub account then runs CI immediately.
+
+```bash
+gh api repos/<owner>/<repo>/actions/permissions/fork-pr-contributor-approval
+# expected: {"approval_policy":"first_time_contributors_new_to_github"}
+```
+
+To set it:
+
+```bash
+gh api --method PUT \
+  repos/<owner>/<repo>/actions/permissions/fork-pr-contributor-approval \
+  -f approval_policy=first_time_contributors_new_to_github
+```
+
+### Copilot code review
+
+Automatic Copilot code review runs on every pull request in this repository.
+That is intentional and `LAB.md` Step 9 uses it: participants form their own
+view of a partner's diff first, then compare it against Copilot's. If you turn
+it off, drop that part of Step 9 so the guide doesn't describe comments that
+aren't there.
+
 ## 8. Seed content
 
 - [ ] Confirm at least 3 seed recommendation files under `docs/recommendations/`
@@ -164,3 +197,54 @@ Before the live session:
 - [ ] Test from a one-commit copy of the repository to confirm the history
       inspection command does not assume `HEAD~1`.
 - [ ] Run both verifier modes and the `gh pr view` completion check above.
+
+---
+
+## 11. Pre-flight — run this on the day
+
+One pass to confirm the repository is in a clean, lab-ready state.
+
+```bash
+R=<owner>/<repo>
+
+# protection: 1 approval, required check, no force push or deletion
+gh api repos/$R/branches/main/protection \
+  --jq '{approvals:.required_pull_request_reviews.required_approving_review_count,
+         checks:.required_status_checks.contexts,
+         force_push:.allow_force_pushes.enabled,
+         deletions:.allow_deletions.enabled}'
+
+# forking and issues on, repo public
+gh api repos/$R --jq '{visibility,allow_forking,has_issues,archived}'
+
+# secret scanning and push protection on
+gh api repos/$R --jq '.security_and_analysis
+  | {secret_scanning:.secret_scanning.status,
+     push_protection:.secret_scanning_push_protection.status}'
+
+# fork PR workflows won't stall the room
+gh api repos/$R/actions/permissions/fork-pr-contributor-approval
+
+# no leftovers from a previous cohort
+gh pr list -R $R --state open
+gh api repos/$R/branches --jq '.[].name'          # expect: main only
+
+# the conflict exercise starts from its seed value
+gh api repos/$R/contents/conflict-lab/retry-policy.md --jq '.content' \
+  | base64 -d | grep 'retry_count'                # expect: retry_count = 3
+```
+
+Expected: 1 approval, `validate-recommendations` required, force pushes and
+deletions blocked, public with forking and issues on, both scanning settings
+enabled, approval policy `first_time_contributors_new_to_github`, no open PRs,
+`main` the only branch, and `retry_count = 3`.
+
+- [ ] All of the above check out
+- [ ] A second person with write access is available to supply approving
+      reviews — you cannot approve your own dry-run pull request, and
+      participants contributing from forks cannot satisfy the rule at all
+      (see section 6)
+
+**Between cohorts**, re-run the last two checks. The conflict exercise merges a
+non-seed `retry_count` into `main`, so it must be reset to `3` before the next
+delivery, and `conflict/*` branches from the previous group should be deleted.

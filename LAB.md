@@ -365,12 +365,31 @@ started running.
 Pair up with another participant:
 
 1. Open their pull request.
-2. Read the **Files changed** diff.
-3. Leave at least one comment (a question, a suggestion, or just "approve
-   with a note").
-4. Submit your review as **Comment** or **Approve**.
+2. Read the **Files changed** diff — all of it, before scrolling to any
+   comments already on the page.
+3. Decide what *you* think. Is the risk statement specific? Would a reader
+   know what to change? Are the values obviously synthetic?
+4. Leave at least one comment (a question, a suggestion, or agreement with a
+   reason).
+5. Submit your review as **Comment** or **Approve**.
 
 This is the step that turns a private change into a team decision.
+
+**You'll notice Copilot has already reviewed it.** This repository runs an
+automatic Copilot code review on every pull request, so there may be AI
+comments waiting before you arrive.
+
+Form your own view first, then read Copilot's. Compare them:
+
+- Did it catch something you missed? Worth knowing what you skim past.
+- Did you catch something it missed? Much more likely than people expect —
+  it can't tell whether a severity rating is *justified*, whether an example
+  is realistic for this environment, or whether the recommendation is
+  actually useful to the team that has to act on it.
+- Did it flag something that isn't a problem here?
+
+An automated review is another reviewer's opinion, not a verdict. Deciding
+what to do with it is the job you're practising.
 
 **Why your approval doesn't merge it — and why that's the point.**
 
