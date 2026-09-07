@@ -21,3 +21,4 @@ workflow.
 | Recommendation | Severity |
 |---|---|
 | [Enable Defender for Storage](azure/enable-defender-for-storage.md) | High |
+| [Require HTTPS-only traffic on storage accounts](azure/require-https-on-storage.md) | High |
