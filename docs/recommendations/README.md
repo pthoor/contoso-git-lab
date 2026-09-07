@@ -21,3 +21,4 @@ workflow.
 | Recommendation | Severity |
 |---|---|
 | [Enable Defender for Storage](azure/enable-defender-for-storage.md) | High |
+| [Enable soft delete on synthetic storage accounts](azure/preflight-dry-run.md) | Medium |
