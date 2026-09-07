@@ -188,15 +188,71 @@ branch, `review: "APPROVED"`, every check conclusion `SUCCESS`, and a non-null
 
 ## 10. Dry run
 
-Before the live session:
+A standing dry-run fork exists for this:
+**https://github.com/Thoor-Security-Labs/contoso-git-lab** — a fork of this
+repository owned by the Thoor Security Labs org, kept for facilitator testing
+only. Issues and wikis are disabled on it so it can't collect stray content.
 
-- [ ] Fork/clone the repo yourself under a throwaway test account (or ask a
-      colleague) and walk through `LAB.md` end to end once, including the
-      merge-conflict exercise, to confirm the required check and branch
-      protection rules behave as expected.
-- [ ] Test from a one-commit copy of the repository to confirm the history
-      inspection command does not assume `HEAD~1`.
+Re-run this whenever the lab content or repository settings change. It walks
+the participant path from a real fork, which is the only way to catch problems
+that appear solely on the cross-repository route.
+
+```bash
+FORK=https://github.com/Thoor-Security-Labs/contoso-git-lab.git
+SRC=https://github.com/pthoor/contoso-git-lab.git
+
+# start from a fork that matches the source
+gh api --method POST repos/Thoor-Security-Labs/contoso-git-lab/merge-upstream \
+  -f branch=main
+
+git clone "$FORK" /tmp/labcheck && cd /tmp/labcheck
+git remote add upstream "$SRC"
+git checkout main && git pull upstream main      # Step 3 — creates upstream/main
+git switch -c feature/dry-run-check
+
+# add a recommendation and an index row, then:
+bash scripts/verify-lab.sh recommendation                    # expect PASS
+bash scripts/validate-recommendations.sh upstream/main HEAD  # expect all good
+git push -u origin feature/dry-run-check
+
+gh pr create -R pthoor/contoso-git-lab --base main \
+  --head Thoor-Security-Labs:feature/dry-run-check \
+  --title "Dry run" --body "Facilitator check. Close without merging."
+```
+
+Then confirm on the pull request:
+
+- [ ] `validate-recommendations` **starts immediately** and passes. If it sits
+      on *pending — waiting for approval*, the fork workflow policy in
+      section 7 has reverted and would stall every participant.
+- [ ] Merge state is `BLOCKED` / `REVIEW_REQUIRED` — protection is working.
+- [ ] Close the pull request without merging, and delete the branch from the
+      fork so the next run starts clean.
+
+Also, at least once per content change:
+
+- [ ] Walk the merge-conflict exercise end to end, including the reset of
+      `conflict-lab/retry-policy.md` back to `retry_count = 3` afterwards.
 - [ ] Run both verifier modes and the `gh pr view` completion check above.
+
+### Known verified / not verified
+
+Last checked 2026-09-07 against `main`:
+
+| Path | Status |
+|---|---|
+| Fork → clone → `upstream` remote → branch → push | verified |
+| `verify-lab.sh recommendation` inside a fork | verified |
+| `validate-recommendations.sh` against `upstream/main` | verified |
+| Cross-repo pull request from a fork | verified |
+| CI on a fork PR runs without an approval stall | verified |
+| Branch protection blocks merge without approval | verified |
+| **Approving review, then merge, into protected `main`** | **not verified** |
+
+The last row needs a second person: you cannot approve your own pull request,
+and a participant contributing from a fork has no write access, so their
+approval never satisfies the rule. Have a colleague with write access run one
+dry-run pull request through approval and merge before the first delivery.
 
 ---
 
